@@ -1,7 +1,7 @@
 # DiarynoteByFirebase
  
 Drawer
-<img src="https://user-images.githubusercontent.com/56069441/125068905-37e54300-e0e0-11eb-9140-e6eb2abcfb6f.jpg" width="100" height="100">
+<img src="https://user-images.githubusercontent.com/56069441/125068905-37e54300-e0e0-11eb-9140-e6eb2abcfb6f.jpg" width="375" height="812">
 ![drawer](https://user-images.githubusercontent.com/56069441/125068905-37e54300-e0e0-11eb-9140-e6eb2abcfb6f.jpg)
 Realtime
 ![real_home](https://user-images.githubusercontent.com/56069441/125068943-46335f00-e0e0-11eb-87c8-f8b7088026e2.jpg)
