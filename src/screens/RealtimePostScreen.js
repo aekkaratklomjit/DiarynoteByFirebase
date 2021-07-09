@@ -2,9 +2,9 @@ import React, {Component} from 'react';
 import {View, Text, StyleSheet, TextInput, Button,TouchableOpacity} from 'react-native';
 import moment from 'moment';
 import {connect} from 'react-redux';
-import {postBlogs} from '../actions';
+import {postRealtimeBlogs} from '../actions';
 
-class PostScreen extends Component {
+class RealtimePostScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -33,14 +33,14 @@ class PostScreen extends Component {
           ',' +
           Math.floor(Math.random() * 256) +
           ')';
-        this.props.postBlogs(
+        this.props.postRealtimeBlogs(
           this.state.title,
           this.state.content,
           time,
           newBgColor,
         );
       this.setState({title: '', content: ''});
-      this.props.navigation.navigate('HomeScreen');
+      this.props.navigation.navigate('RealtimeHomeScreen');
     }
   };
 
@@ -86,7 +86,7 @@ class PostScreen extends Component {
     );
   }
 }
-export default connect(null, {postBlogs})(PostScreen);
+export default connect(null, {postRealtimeBlogs})(RealtimePostScreen);
 
 // define your styles
 const styles = StyleSheet.create({

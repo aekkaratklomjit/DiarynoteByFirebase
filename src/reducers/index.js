@@ -1,11 +1,11 @@
 import { combineReducers } from "redux";
-import BlogReducer from "./BlogReducer";
+import RealtimeBlogReducer from "./RealtimeBlogReducer";
 import LoadingReducer from "./LoadingReducer";
-import BlogReducerFirestore from "./BlogReducerFirestore";
+import FirestoreBlogReducer from "./FirestoreBlogReducer";
 
 const rootReducer = combineReducers({
-    blogsListFirestore : BlogReducerFirestore,
-    blogsList : BlogReducer,
+    blogsListFirestore : FirestoreBlogReducer,
+    blogsListRealtime : RealtimeBlogReducer,
     loadingReducer:LoadingReducer,
 })
 

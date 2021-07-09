@@ -6,26 +6,26 @@ import {
   FlatList,
   TouchableHighlight,
 } from 'react-native';
-import {getBlogs, deleteBlogs} from '../actions';
+import {getRealtimeBlogs, deleteRealtimeBlogs} from '../actions';
 import {connect} from 'react-redux';
 import {Icon} from 'react-native-elements';
 import _ from 'lodash';
 
-class HomeScreen extends Component {
+class RealtimeHomeScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
     };
   }
   componentDidMount() {
-    this.props.getBlogs();
+    this.props.getRealtimeBlogs();
   }
 
   render() {
     return (
       <View style={{backgroundColor: '#ffecb3', flex: 1}}>
         <Text style={{...styles.Topic_fonts, padding: 18}}>
-          Diary Note by Realtime Database
+          Diary Note by Realtime
         </Text>
         {this.props.loadingReducer ? (
           <Text>Loading Please Wait</Text>
@@ -66,7 +66,7 @@ class HomeScreen extends Component {
                       }}>
                       <TouchableHighlight
                         onPress={() =>
-                          this.props.navigation.navigate('Edit', {item})
+                          this.props.navigation.navigate('RealtimeEditScreen', {item})
                         }>
                         <View style={{marginRight: 15}}>
                           <Icon
@@ -77,7 +77,7 @@ class HomeScreen extends Component {
                         </View>
                       </TouchableHighlight>
                       <TouchableHighlight
-                        onPress={() => this.props.deleteBlogs(item.key)}>
+                        onPress={() => this.props.deleteRealtimeBlogs(item.key)}>
                         <View>
                           <Icon
                             name="trash"
@@ -99,7 +99,7 @@ class HomeScreen extends Component {
 }
 
 const mapStateToProps = state => {
-  const listOfBlogs = _.map(state.blogsList.blogsList, (val, key) => {
+  const listOfBlogs = _.map(state.blogsListRealtime.blogsListRealtime, (val, key) => {
     return {
       ...val,
       key: key,
@@ -126,7 +126,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default connect(mapStateToProps, {getBlogs, deleteBlogs})(HomeScreen);
+export default connect(mapStateToProps, {getRealtimeBlogs, deleteRealtimeBlogs})(RealtimeHomeScreen);
 
 // import * as React from 'react';
 // import { Button, View, Text } from 'react-native';

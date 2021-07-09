@@ -1,20 +1,9 @@
-import { Tile } from 'react-native-elements/dist/tile/Tile';
 import firebase from '../Firebase';
 
-export function postBlogs(title,content,time,newBgColor) {
-  return dispatch => {
-    firebase.database().ref('/blogs').push({title,content,time,newBgColor});
-    // firebase.database().ref('/blogs/').set({
-    //   username: "name",
-    //   email: "email",
-    //   profile_picture : "imageUrl"
-    // });
-  };
-}
+// RealtimeBlogs
 
-export function getBlogs() {
+export function getRealtimeBlogs() {
   return dispatch => {
-    console.log('getBlogs')
     dispatch({
       type: 'BLOGS_LOADING_STATUS',
       payload: true,
@@ -35,7 +24,27 @@ export function getBlogs() {
   };
 }
 
-export function getBlogsFirestore(){
+export function postRealtimeBlogs(title,content,time,newBgColor) {
+  return dispatch => {
+    firebase.database().ref('/blogs').push({title,content,time,newBgColor});
+  };
+}
+
+export function editRealtimeBlog(title,content,key) {
+  return dispatch => {
+    firebase.database().ref('/blogs').child(key).update({title, content})
+  };
+}
+
+export function deleteRealtimeBlogs(key) {
+  return dispatch => {
+    firebase.database().ref(`/blogs/${key}`).remove()
+  };
+}
+
+
+//FirestoreBlogs
+export function getFirestoreBlogs(){
      return (dispatch) => {
       dispatch({
         type: 'BLOGS_LOADING_STATUS',
@@ -45,10 +54,10 @@ export function getBlogsFirestore(){
         .firestore()
         .collection("blogs")
         .get().then((querySnapshot) => {
-          const movie = []
+          const diary = []
           querySnapshot.forEach((doc) => {
               const {title,content,time,newBgColor} = doc.data();
-              movie.push({
+              diary.push({
                 keys:doc.id,
                 title,
                 content,
@@ -58,7 +67,7 @@ export function getBlogsFirestore(){
           });
           dispatch({
              type: 'BLOGS_FETCH_FIRESTOREDATABASE',
-             payload: movie,
+             payload: diary,
           });
       }); 
       dispatch({
@@ -68,7 +77,7 @@ export function getBlogsFirestore(){
      } 
  }
 
- export function postBlogsFirestore(title,content,time,newBgColor) {
+ export function postFirestoreBlogs(title,content,time,newBgColor) {
   return dispatch => {
     firebase.firestore().collection("blogs").add({
       title: title,
@@ -78,28 +87,45 @@ export function getBlogsFirestore(){
   };
 }
 
-export function editBlog(title,content,key) {
-  return dispatch => {
-    firebase.database().ref('/blogs').child(key).update({title, content})
-  };
-}
+
 export function editFirestoreBlog(title,content,key) {
   return dispatch => {
     firebase.firestore().collection("blogs").doc(key).update({   
      title: title,
      content : content,
      })
-
+     dispatch({
+      type: 'BLOGS_LOADING_STATUS',
+      payload: true,
+     });
+     firebase
+     .firestore()
+     .collection("blogs")
+     .get().then((querySnapshot) => {
+       const diary = []
+       querySnapshot.forEach((doc) => {
+           const {title,content,time,newBgColor} = doc.data();
+           diary.push({
+             keys:doc.id,
+             title,
+             content,
+             time,
+             newBgColor
+           })
+       });
+       dispatch({
+          type: 'BLOGS_FETCH_FIRESTOREDATABASE',
+          payload: diary,
+       });
+   }); 
+   dispatch({
+     type: 'BLOGS_LOADING_STATUS',
+     payload: false,
+   });
   };
 }
 
-export function deleteBlogs(key) {
-  return dispatch => {
-    firebase.database().ref(`/blogs/${key}`).remove()
-  };
-}
-
-export function deleteBlogsFirestore(key) {
+export function deleteFirestoreBlogs(key) {
   return dispatch => {
     firebase.firestore().collection("blogs").doc(key).delete()
     dispatch({
@@ -110,10 +136,10 @@ export function deleteBlogsFirestore(key) {
       .firestore()
       .collection("blogs")
       .get().then((querySnapshot) => {
-        const movie = []
+        const diary = []
         querySnapshot.forEach((doc) => {
             const {title,content,time,newBgColor} = doc.data();
-            movie.push({
+            diary.push({
               keys:doc.id,
               title,
               content,
@@ -123,7 +149,7 @@ export function deleteBlogsFirestore(key) {
         });
         dispatch({
            type: 'BLOGS_FETCH_FIRESTOREDATABASE',
-           payload: movie,
+           payload: diary,
         });
     }); 
     dispatch({

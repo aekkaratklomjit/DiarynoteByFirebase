@@ -1,11 +1,11 @@
 //import liraries
 import React, { Component } from 'react';
 import { View, Text, StyleSheet ,TextInput,TouchableOpacity} from 'react-native';
-import {editBlog} from '../actions'
+import {editRealtimeBlog} from '../actions'
 import {connect} from 'react-redux'
 
 // create a component
-class Edit extends Component {
+class RealtimeEditScreen extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -15,14 +15,14 @@ class Edit extends Component {
         };
       }
     onSubmit=()=>{
-        this.props.editBlog(this.state.title, this.state.content, this.state.key);
+        this.props.editRealtimeBlog(this.state.title, this.state.content, this.state.key);
 
         this.setState({
             title:"",
             content:"",
            key:""
         })
-        this.props.navigation.navigate("HomeScreen")
+        this.props.navigation.navigate("RealtimeHomeScreen")
     }
     render() {
         return (
@@ -99,4 +99,4 @@ const styles = StyleSheet.create({
 });
 
 //make this component available to the app
-export default connect(null, {editBlog})(Edit);
+export default connect(null, {editRealtimeBlog})(RealtimeEditScreen);

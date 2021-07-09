@@ -43,7 +43,7 @@ export function DrawerContent(props) {
                 }}
               />
               <Text style={{fontSize: 18, paddingLeft: 12}}>
-                Firebase Realtime Database
+                Realtime Database
               </Text>
             </View>
           </TouchableOpacity>
@@ -70,7 +70,7 @@ export function DrawerContent(props) {
                 }}
               />
               <Text style={{fontSize: 18, paddingLeft: 12}}>
-                Cloud Firestore
+                Firestore Database
               </Text>
             </View>
           </TouchableOpacity>

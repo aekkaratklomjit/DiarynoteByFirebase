@@ -8,9 +8,9 @@ import {
 } from 'react-native';
 import moment from 'moment';
 import {connect} from 'react-redux';
-import {postBlogsFirestore,getBlogsFirestore} from '../actions';
+import {postFirestoreBlogs,getFirestoreBlogs} from '../actions';
 
-class PostScreenFirestore extends Component {
+class FirestorePostScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -29,14 +29,14 @@ class PostScreenFirestore extends Component {
        ',' +
        Math.floor(Math.random() * 256) +
        ')';
-    this.props.postBlogsFirestore(
+    this.props.postFirestoreBlogs(
        this.state.title,
        this.state.content,
        time,
        newBgColor)
-    this.props.getBlogsFirestore()
+    this.props.getFirestoreBlogs()
     this.setState({title: '', content: ''});
-    this.props.navigation.navigate('HomeScreenFirestore');
+    this.props.navigation.navigate('FirestoreHomeScreen');
   };
 
   render() {
@@ -97,7 +97,7 @@ class PostScreenFirestore extends Component {
   }
 }
 
-export default connect(null, {postBlogsFirestore,getBlogsFirestore})(PostScreenFirestore);
+export default connect(null, {postFirestoreBlogs,getFirestoreBlogs})(FirestorePostScreen);
 
 const styles = StyleSheet.create({
   container: {

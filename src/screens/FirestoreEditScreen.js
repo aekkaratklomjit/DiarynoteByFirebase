@@ -3,9 +3,8 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet ,TextInput,TouchableOpacity} from 'react-native';
 import {editFirestoreBlog} from '../actions'
 import {connect} from 'react-redux'
-import firebase from '../Firebase';
 // create a component
-class EditFirestore extends Component {
+class FirestoreEditScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -26,7 +25,7 @@ class EditFirestore extends Component {
         content:"",
         key:""
     })
-    this.props.navigation.navigate("HomeScreenFirestore")
+    this.props.navigation.navigate("FirestoreHomeScreen")
 }
 render() {
     return (
@@ -104,4 +103,4 @@ const styles = StyleSheet.create({
 });
 
 //make this component available to the app
-export default connect(null, {editFirestoreBlog})(EditFirestore);
+export default connect(null, {editFirestoreBlog})(FirestoreEditScreen);

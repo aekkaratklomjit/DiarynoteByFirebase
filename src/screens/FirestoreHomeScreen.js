@@ -8,16 +8,16 @@ import {
 } from 'react-native';
 import {connect} from 'react-redux';
 import {Icon} from 'react-native-elements';
-import {getBlogsFirestore, deleteBlogsFirestore} from '../actions';
+import {getFirestoreBlogs, deleteFirestoreBlogs} from '../actions';
 import _ from 'lodash';
 
-class HomeScreenFirestore extends Component {
+class FirestoreHomeScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {};
   }
   componentDidMount() {
-    this.props.getBlogsFirestore();
+    this.props.getFirestoreBlogs();
   }
   render() {
     return (
@@ -26,7 +26,7 @@ class HomeScreenFirestore extends Component {
           Diary Note by Firestore
         </Text>
         {this.props.loadingReducer ? (
-          <Text style={{fontSize:50}}>Loading Please Wait</Text>
+          <Text style={{fontSize:12}}>Loading Please Wait</Text>
         ) : (
           <FlatList
             style={{width: '100%'}}
@@ -64,7 +64,7 @@ class HomeScreenFirestore extends Component {
                       }}>
                       <TouchableHighlight
                         onPress={() =>
-                          this.props.navigation.navigate('EditFirestore', {item})
+                          this.props.navigation.navigate('FirestoreEditScreen', {item})
                         }>
                         <View style={{marginRight: 15}}>
                           <Icon
@@ -76,7 +76,7 @@ class HomeScreenFirestore extends Component {
                       </TouchableHighlight>
                       <TouchableHighlight
                         onPress={() =>{
-                          this.props.deleteBlogsFirestore(item.keys)
+                          this.props.deleteFirestoreBlogs(item.keys)
                           }
                         }>
                         <View>
@@ -128,4 +128,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default connect(mapStateToProps, {getBlogsFirestore,deleteBlogsFirestore})(HomeScreenFirestore);
+export default connect(mapStateToProps, {getFirestoreBlogs,deleteFirestoreBlogs})(FirestoreHomeScreen);

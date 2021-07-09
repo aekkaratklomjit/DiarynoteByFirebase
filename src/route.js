@@ -2,15 +2,17 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import { DrawerContent } from './screens/DrawerContent';
 import * as React from 'react';
 import {Icon} from 'react-native-elements';
-import HomeScreen from './screens/HomeScreen';
-import PostScreen from './screens/PostScreen';
-import Edit from './screens/Edit';
-import PostScreenFirestore from './screens/PostScreenFirestore';
-import HomeScreenFirestore from './screens/HomeScreenFirestore';
-import EditFirestore from './screens/EditFirestore';
-import { DrawerContent } from './screens/DrawerContent';
+import RealtimeHomeScreen from './screens/RealtimeHomeScreen';
+import RealtimePostScreen from './screens/RealtimePostScreen';
+import RealtimeEditScreen from './screens/RealtimeEditScreen';
+
+import FirestoreHomeScreen from './screens/FirestoreHomeScreen';
+import FirestorePostScreen from './screens/FirestorePostScreen';
+import FirestoreEditScreen from './screens/FirestoreEditScreen';
+
 
 const Stack = createStackNavigator();
 function AppNavigator() {
@@ -26,29 +28,29 @@ function AppNavigator() {
 const RealtimeStack = createStackNavigator();
 function RealtimeStackScreen() {
   return (
-    <RealtimeStack.Navigator initialRouteName="HomeScreen" headerMode="none">
-      <RealtimeStack.Screen name="HomeScreen" component={HomeScreen} />
-      <RealtimeStack.Screen name="Edit" component={Edit} />
+    <RealtimeStack.Navigator initialRouteName="RealtimeHomeScreen" headerMode="none">
+      <RealtimeStack.Screen name="RealtimeHomeScreen" component={RealtimeHomeScreen} />
+      <RealtimeStack.Screen name="RealtimeEditScreen" component={RealtimeEditScreen} />
     </RealtimeStack.Navigator>
   );
 }
 const PostRealtimeStack = createStackNavigator();
 function PostRealtimeStackScreen() {
   return (
-    <PostRealtimeStack.Navigator initialRouteName="PostScreen" headerMode="none">
-      <PostRealtimeStack.Screen name="PostScreen" component={PostScreen} />
+    <PostRealtimeStack.Navigator initialRouteName="RealtimePostScreen" headerMode="none">
+      <PostRealtimeStack.Screen name="RealtimePostScreen" component={RealtimePostScreen} />
     </PostRealtimeStack.Navigator>
   );
 }
 const FirestoreStack = createStackNavigator();
 function FirestoreStackScreen() {
   return (
-    <FirestoreStack.Navigator initialRouteName="HomeScreenFirestore" headerMode="none">
+    <FirestoreStack.Navigator initialRouteName="FirestoreHomeScreen" headerMode="none">
       <FirestoreStack.Screen
-        name="HomeScreenFirestore"
-        component={HomeScreenFirestore}
+        name="FirestoreHomeScreen"
+        component={FirestoreHomeScreen}
       />
-      <FirestoreStack.Screen name="EditFirestore" component={EditFirestore} />
+      <FirestoreStack.Screen name="FirestoreEditScreen" component={FirestoreEditScreen} />
     </FirestoreStack.Navigator>
   );
 }
@@ -56,10 +58,10 @@ function FirestoreStackScreen() {
 const PostFirestoreStack = createStackNavigator();
 function PostFirestoreStackScreen() {
   return (
-    <PostFirestoreStack.Navigator initialRouteName="PostScreenFirestore" headerMode="none">
+    <PostFirestoreStack.Navigator initialRouteName="FirestorePostScreen" headerMode="none">
       <PostFirestoreStack.Screen
-        name="PostScreenFirestore"
-        component={PostScreenFirestore}
+        name="FirestorePostScreen"
+        component={FirestorePostScreen}
       />
     </PostFirestoreStack.Navigator>
   );
@@ -86,7 +88,7 @@ function RealtimeTabScreen() {
         }}
       />
       <RealtimeTab.Screen
-        name="PostRealtimeStackScreen"
+        name="Post"
         component={PostRealtimeStackScreen}
         options={{
           tabBarIcon: ({color, size}) => (
@@ -124,7 +126,7 @@ function FirestoreTabScreen() {
         }}
       />
       <FirestoreTab.Screen
-        name="PostFirestoreStackScreen"
+        name="Post"
         component={PostFirestoreStackScreen}
         options={{
           tabBarIcon: ({color, size}) => (
