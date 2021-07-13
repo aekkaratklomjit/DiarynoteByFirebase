@@ -1,3 +1,4 @@
+# (Updating README.md)
 # DiarynoteByFirebase
 ### ( React Native , Redux , Firebase ) 
 
